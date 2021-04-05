@@ -11,8 +11,8 @@ export class MongooseConfigService implements MongooseOptionsFactory {
     loadEnvironmentVariables()
     
     return {
-      // uri:"mongodb+srv://macsof:macsof@nextlevelcarwash-yjs3i.mongodb.net/MVC_DEV?retryWrites=true&w=majority",
-      uri:"",
+      // uri:"",
+      uri:"mongodb+srv://macsof:macsof@nextlevelcarwash-yjs3i.mongodb.net/MVC_DEV?retryWrites=true&w=majority",
       useCreateIndex: true,
       keepAlive: true,
       useNewUrlParser: true,
