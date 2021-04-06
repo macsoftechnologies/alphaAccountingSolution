@@ -1,14 +1,16 @@
 import { Controller, Body, Get, HttpCode, HttpStatus, Param, Post, Put, Query } from '@nestjs/common';
-import { UsersService } from '../users/users/users.service'
+import { UsersService } from '../users/users/users.service';
 import { UserRegister} from '../users/dto/user.dto'
+
 @Controller('users')
 export class UsersController {
-    usersService: any;
+
+    constructor(private UsersService : UsersService){}
     
     @Post('/register')
     async create(@Body() req : UserRegister){
          try {
-            const result = await this.usersService.Create(req)
+            const result = await this.UsersService.Create(req)
             return result
          } catch (error) {
                 return {
