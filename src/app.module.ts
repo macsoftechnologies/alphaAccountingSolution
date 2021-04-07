@@ -2,14 +2,16 @@ import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { UsersController } from './users/users.controller';
-import { UsersService } from './users/users/users.service';
-
+import { UserModule } from './users/user.module';
+import { MongooseConfigService } from './_common/configs/mongoose.config';
+//import { UsersController } from './users/users.controller';
+//import { UsersService } from './users/users/users.service';
 @Module({
   imports: [
-    MongooseModule.forRoot(process.env.DB_CONNECTION_STRING),
-     ],
-  controllers: [AppController,  UsersController],
-  providers: [AppService, UsersService,],
+    MongooseModule.forRootAsync({useClass : MongooseConfigService}),
+    UserModule
+    ],
+  controllers: [AppController],
+  providers: [AppService],
 })
 export class AppModule {}
