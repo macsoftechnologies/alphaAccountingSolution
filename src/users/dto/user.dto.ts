@@ -1,23 +1,38 @@
 import { IsString, IsEmail, IsEnum, IsOptional, IsNumber, IsNotEmpty } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 export class UserLogin {
+    
+    @ApiProperty()
+    @IsString()
+    @IsNotEmpty()
     MobileNum: number
-    Email:string
+    
+    @ApiProperty()
+    @IsString()
+    @IsNotEmpty()
+    @IsEmail()
+    Email: string
+    
+    @ApiProperty()
+    @IsString()
+    @IsNotEmpty()
     Password: string
 }
 
 export class UserRegister {
     @ApiProperty()
     @IsString()
+    @IsNotEmpty()
     UserId: string;
 
     @ApiProperty()
     @IsString()
+    @IsNotEmpty()
     UserName: string;
 
     @ApiProperty()
-    @IsEmail()
     @IsNotEmpty()
+    @IsEmail()
     Email: string;
 
     @ApiProperty()
