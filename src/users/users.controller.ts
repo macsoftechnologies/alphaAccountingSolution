@@ -1,6 +1,6 @@
 import { Controller, Body, Get, HttpCode, HttpStatus, Param, Post, Put, Query } from '@nestjs/common';
 import { UsersService } from '../users/users/users.service';
-import { UserRegister} from '../users/dto/user.dto';
+import { UserRegister, UserLogin } from '../users/dto/user.dto';
 
 @Controller('users')
 export class UsersController {
@@ -11,6 +11,20 @@ export class UsersController {
     async create(@Body() req : UserRegister){
          try {
             const result = await this.UsersService.Create(req)
+            return result
+         } catch (error) {
+                return {
+                    statusCode: HttpStatus.INTERNAL_SERVER_ERROR,
+                    message: error.message,
+                };
+         }
+
+    }
+
+    @Post('/login')
+    async login(@Body() req : UserLogin){
+         try {
+            const result = await this.UsersService.Login(req)
             return result
          } catch (error) {
                 return {

@@ -2,7 +2,7 @@ import { HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Users } from '../schema/user.schema';
-import { UserRegister } from '../dto/user.dto';
+import { UserRegister, UserLogin} from '../dto/user.dto';
 
 @Injectable()
 export class UsersService {
@@ -18,7 +18,7 @@ export class UsersService {
             if (loginRes) {
                 return {
                     statusCode: HttpStatus.CONFLICT,
-                    message: `User Already Exit with ${loginRes.Email} and ${loginRes.Mobile}`
+                    message: `User Already Exits with ${loginRes.Email} and ${loginRes.Mobile}`
                 }
             }
 
@@ -41,6 +41,41 @@ export class UsersService {
                 message: "Invalid Request"
             }
 
+        } catch (error) {
+            return {
+                statusCode: HttpStatus.INTERNAL_SERVER_ERROR,
+                message: error.message,
+            };
+        }
+    }
+    async Login(req: UserLogin) {
+        try {
+
+            const loginRes = await this.userModel.findOne({ $or: [{ Email: req.Email }, { MobileNum: req.MobileNum }] }).lean()
+            if (loginRes) {
+                if (loginRes.Password === req.Password) {
+
+                    return {
+                        statusCode: HttpStatus.OK,
+                        message: "Login SuccessFully",
+                        authentication: {
+                            UserId: loginRes.UserId,
+                            Email: loginRes.Email
+                        }
+                    }
+                }
+
+                return {
+                    statusCode: HttpStatus.UNAUTHORIZED,
+                    message: "Invalid Password"
+                }
+
+            }
+            return {
+                statusCode: HttpStatus.NOT_FOUND,
+                message: "User Not Found"
+
+            }
         } catch (error) {
             return {
                 statusCode: HttpStatus.INTERNAL_SERVER_ERROR,
