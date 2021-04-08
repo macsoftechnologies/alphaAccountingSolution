@@ -12,13 +12,16 @@ export class UsersService {
 
 
     async Create(req: UserRegister) {
+        console.log("servive req", req);
+        
         try {
             const loginRes = await this.userModel.findOne({ $or: [{ Email: req.Email }, { Mobile: req.MobileNum }] })
+            console.log("loginRes", loginRes);
             
             if (loginRes) {
                 return {
                     statusCode: HttpStatus.CONFLICT,
-                    message: `User Already Exits with ${loginRes.Email} and ${loginRes.Mobile}`
+                    message: `User Already Exits with ${loginRes.Email} and ${loginRes.MobileNum}`
                 }
             }
 
@@ -30,7 +33,8 @@ export class UsersService {
                     data: {
                         authentication: {
                             UserId: registerRes.UserId,
-                            Email: registerRes.Email
+                            Email: registerRes.Email,
+                            MobileNum: registerRes.MobileNum
                         }
                     }
                 }

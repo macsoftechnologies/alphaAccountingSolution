@@ -17,6 +17,7 @@ export class UserRegister {
 
     @ApiProperty()
     @IsEmail()
+    @IsNotEmpty()
     Email: string;
 
     @ApiProperty()
