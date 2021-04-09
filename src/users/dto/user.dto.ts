@@ -21,8 +21,7 @@ export class UserLogin {
 
 export class UserRegister {
     @ApiProperty()
-    @IsString()
-    @IsNotEmpty()
+    
     UserId: string;
 
     @ApiProperty()

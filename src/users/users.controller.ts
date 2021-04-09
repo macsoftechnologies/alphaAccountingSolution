@@ -36,4 +36,10 @@ export class UsersController {
         }
 
     }
+
+    @Get('/admin')
+    async getAllUsers(){
+        const users = await this.UsersService.getUsers();
+        return users;
+    }
 }

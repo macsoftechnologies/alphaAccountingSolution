@@ -87,4 +87,8 @@ export class UsersService {
             };
         }
     }
+    async getUsers() {
+        const users = await this.userModel.find().exec();
+        return users;
+    }
 }
