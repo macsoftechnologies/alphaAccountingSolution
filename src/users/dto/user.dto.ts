@@ -21,7 +21,7 @@ export class UserLogin {
 
 export class UserRegister {
     @ApiProperty()
-    
+    n
     UserId: string;
 
     @ApiProperty()

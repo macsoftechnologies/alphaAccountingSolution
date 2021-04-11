@@ -7,7 +7,7 @@ export class Users extends Document{
     UserId: string
     @Prop({required : true})
     UserName : string
-    @Prop({required : true , unique : true})
+    @Prop({required : true})
     Email : string
     @Prop({required: true})
     MobileNum : number

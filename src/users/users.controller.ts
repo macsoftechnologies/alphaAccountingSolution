@@ -42,4 +42,18 @@ export class UsersController {
         const users = await this.UsersService.getUsers();
         return users;
     }
+
+    @Get('/userdetails')
+    async userDetails(@Query('Email') Email : string) {
+        console.log(Email)
+        try {
+            const response = await this.UsersService.UserDetails(Email)
+            return response
+        } catch (error) {
+            return {
+                StatusCode : HttpStatus.INTERNAL_SERVER_ERROR,
+                Message : error
+            }
+        }
+    }
 }

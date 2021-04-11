@@ -12,13 +12,11 @@ export class UsersService {
 
 
     async Create(req: UserRegister) {
-        console.log("servive req", req);
         
         try {
             const loginRes = await this.userModel.findOne({ $or: [{ Email: req.Email }, { Mobile: req.MobileNum }] })
-            console.log("loginRes", loginRes);
-            
-            if (loginRes) {
+    
+        if (loginRes) {
                 return {
                     statusCode: HttpStatus.CONFLICT,
                     message: `User Already Exits with ${loginRes.Email} and ${loginRes.MobileNum}`
@@ -91,4 +89,34 @@ export class UsersService {
         const users = await this.userModel.find().exec();
         return users;
     }
+
+    async UserDetails(Email: string) {
+        try {
+
+            const userResponse = await this.userModel.findOne({ Email: Email })
+
+            if (userResponse) {
+                return {
+                    StatusCode: HttpStatus.OK,
+                    Message: 'User Details',
+                    Data: {
+                        UserDetails: userResponse
+                    }
+
+                }
+            }
+            return {
+                StatusCode: HttpStatus.BAD_REQUEST,
+                Message: "InValid Request"
+            }
+
+        } catch (error) {
+            return {
+                StatusCode: HttpStatus.INTERNAL_SERVER_ERROR,
+                Message: error
+
+            }
+        }
+    }
+    
 }
