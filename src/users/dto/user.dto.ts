@@ -21,7 +21,7 @@ export class UserLogin {
 
 export class UserRegister {
     @ApiProperty()
-    n
+    
     UserId: string;
 
     @ApiProperty()
@@ -45,4 +45,9 @@ export class UserRegister {
     Password: string;
 }
 
+export class MobileNumberDto {
+    @ApiProperty()
+    @IsString()
+    MobileNum: number;
+  }
 
