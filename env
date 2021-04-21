@@ -1,6 +1,3 @@
-
-
-
 MONGO_CONN_STRING = 'mongodb+srv://macsof:macsof@nextlevelcarwash.yjs3i.mongodb.net/Alpha_Traders?retryWrites=true&w=majority'
 
 PAYMENT_REDIRECT_URL = 'http://localhost:4200/myaccount/'

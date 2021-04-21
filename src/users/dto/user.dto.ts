@@ -51,3 +51,32 @@ export class MobileNumberDto {
     MobileNum: number;
   }
 
+export class OtpNumber {
+    otp: "12345";
+}
+
+export class VerifyOtpDto {
+    @ApiProperty()
+    @IsString()
+    mobileNumber: string;
+  
+    @ApiProperty()
+    @IsString()
+    otp: string;
+}
+
+export class UserUpdate {
+    UserId : string
+    Email : string
+    Mobile : string
+
+}
+
+export class DeleteUser{
+    DeleteType : string
+    UserId:string
+    UserName:string
+    Email: string
+    MobileNum:string
+    Password: string
+}
