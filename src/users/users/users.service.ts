@@ -2,7 +2,7 @@ import { HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Users } from '../schema/user.schema';
-import { UserRegister, UserLogin, VerifyOtpDto, UserUpdate, DeleteUser } from '../dto/user.dto';
+import { UserRegister, UserLogin, VerifyOtpDto, UserUpdate, DeleteUser, updateUser } from '../dto/user.dto';
 import moment = require('moment');
 @Injectable()
 export class UsersService {
@@ -38,6 +38,10 @@ export class UsersService {
                 }
 
             }
+
+
+
+
             return {
                 statusCode: HttpStatus.BAD_REQUEST,
                 message: "Invalid Request"
@@ -205,6 +209,29 @@ export class UsersService {
             return error_response;
         }
 
+    }
+   
+    async updateUser(body: updateUser) {
+        try {
+            // console.log(body, "body............")
+            const updateRes = await this.userModel.updateOne({ UserId: body.UserId }, { $set: { UserName: body.UserName, Email: body.Email, Password: body.Password, MobileNum: body.MobileNum } })
+            // console.log(updateRes, "update,,res")
+            if (updateRes.nModified == 1) {
+                return {
+                    StatusCode: HttpStatus.OK,
+                    Message: "Updated SuccessFully"
+                }
+            }
+            return {
+                StatusCode: HttpStatus.BAD_REQUEST,
+                Message: "Updated Failed"
+            }
+        } catch (error) {
+            return {
+                StatusCode: HttpStatus.INTERNAL_SERVER_ERROR,
+                Message: error.message
+            }
+        }
     }
 
 }

@@ -1,6 +1,6 @@
 import { Controller, Body, Get, HttpCode, HttpStatus, Param, Post, Put, Query, Res, Delete } from '@nestjs/common';
 import { UsersService } from '../users/users/users.service';
-import { UserRegister, UserLogin, MobileNumberDto, VerifyOtpDto, UserUpdate, DeleteUser} from '../users/dto/user.dto';
+import { UserRegister, UserLogin, MobileNumberDto, VerifyOtpDto, UserUpdate, DeleteUser, updateUser} from '../users/dto/user.dto';
 import { Response } from 'express';
 import moment = require('moment');
 
@@ -102,9 +102,7 @@ export class UsersController {
     }
   }
  
- 
-
-  @Delete('/delete')
+ @Delete('/delete')
   async deleteUser(@Body() req: DeleteUser) { 
     try {
       let response = await this.UsersService.delete(req);
@@ -117,6 +115,19 @@ export class UsersController {
       };
     }
   }
+
+  @Put('/update')
+    async update(@Body() req: updateUser) {
+        try {
+            const result = await this.UsersService.updateUser(req)
+            return result
+        } catch (error) {
+            return {
+                statusCode: HttpStatus.INTERNAL_SERVER_ERROR,
+                message: error.message,
+            };
+        }
+    }
 }
 
     

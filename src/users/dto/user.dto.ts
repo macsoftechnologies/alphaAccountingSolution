@@ -81,7 +81,7 @@ export class updateUser{
     UserId :string
     UserName : string
     Email : string
-    MobileNum : string
+    MobileNum : number
     Password : string 
     
 }
