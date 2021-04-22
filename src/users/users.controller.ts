@@ -102,28 +102,10 @@ export class UsersController {
     }
   }
  
-/* @Put('/userupdate')
-  async userUpdate(@Query('userID') UserId : string) {
-      console.log(UserId)
-      try {
-          const response = await this.UsersService.userUpdate(UserId)
-          return response
-      } catch (error) {
-          return {
-              StatusCode : HttpStatus.INTERNAL_SERVER_ERROR,
-              Message : error
-          }
-      }
-  } 
-
-  @Delete('/userDelete')
-  remove(@Query('userId') UserId: string) {
-    console.log("controller", UserId)
-    return this.UsersService.remove(UserId);
-  }*/
+ 
 
   @Delete('/delete')
-  async deleteBlog(@Body() req: DeleteUser) { 
+  async deleteUser(@Body() req: DeleteUser) { 
     try {
       let response = await this.UsersService.delete(req);
 

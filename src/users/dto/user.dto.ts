@@ -75,8 +75,13 @@ export class UserUpdate {
 export class DeleteUser{
     DeleteType : string
     UserId:string
-    UserName:string
-    Email: string
-    MobileNum:string
-    Password: string
+    }
+
+export class updateUser{
+    UserId :string
+    UserName : string
+    Email : string
+    MobileNum : string
+    Password : string 
+    
 }
