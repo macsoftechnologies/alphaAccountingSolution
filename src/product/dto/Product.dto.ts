@@ -17,3 +17,8 @@ export class updateProduct{
     Discount : number
     Documents_required : string
 }
+
+export class DeleteProduct{
+    DeleteType : string
+    Product_id:string
+    }

@@ -2,7 +2,7 @@ import { HttpStatus, Injectable } from '@nestjs/common';
 import { product } from '../schema/product.schema';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { productRegister, updateProduct } from '../dto/Product.dto';
+import { DeleteProduct, productRegister, updateProduct } from '../dto/Product.dto';
 
 @Injectable()
 export class ProductService {
@@ -66,5 +66,32 @@ export class ProductService {
             }
         }
     }
+  
+    async delete(body: DeleteProduct) {
+        try {
 
+            const deleteRes = await this.productModel.deleteOne({Product_id:body.Product_id});
+        console.log(deleteRes, "deleteRes...")
+
+            if (deleteRes.n == 1) {
+                return {
+                    statusCode: HttpStatus.OK,
+                    message: 'User deleted successfully',
+                };
+            }
+            return {
+                StatusCode: HttpStatus.BAD_REQUEST,
+                Message: "User deletion Failed"
+            }
+            
+        } catch (error) {
+            let error_response = {
+                statusCode: HttpStatus.INTERNAL_SERVER_ERROR,
+                data: null,
+                message: error,
+            };
+            return error_response;
+        }
+
+    }
 }

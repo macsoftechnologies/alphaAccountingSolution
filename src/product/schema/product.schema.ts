@@ -16,6 +16,9 @@ export class product extends Document{
     Discount : number
     @Prop({required : true})
     Documents_required : string
+    @Prop({ default: false })
+    @IsOptional()
+    isDeleted?: boolean;
    
 }
 export const  ProductSchema = SchemaFactory.createForClass(product);

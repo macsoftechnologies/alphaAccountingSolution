@@ -1,5 +1,5 @@
 import { Controller, Body, Get, HttpCode, HttpStatus, Param, Post, Put, Query, Res, Delete} from '@nestjs/common';
-import { productRegister, updateProduct } from './dto/Product.dto';
+import { DeleteProduct, productRegister, updateProduct } from './dto/Product.dto';
 import { ProductService } from "../product/product/product.service";
 @Controller('product')
 export class ProductController {
@@ -32,4 +32,18 @@ export class ProductController {
             };
         }
     }
+
+    @Delete('/delete')
+    async deleteUser(@Body() req: DeleteProduct) { 
+      try {
+        let response = await this.productService.delete(req);
+  
+        return response
+      } catch (error) {
+        return {
+            statusCode: HttpStatus.INTERNAL_SERVER_ERROR,
+            message: error.message,
+        };
+      }
+    } 
 }
