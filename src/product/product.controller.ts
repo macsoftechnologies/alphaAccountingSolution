@@ -1,13 +1,28 @@
-import { Controller, Body, Get, HttpCode, HttpStatus, Param, Post, Put, Query, Res, Delete} from '@nestjs/common';
+import { Controller, Body, Get, HttpCode, HttpStatus, Param, Post, Put, Query, Res, Delete, UploadedFile, UploadedFiles, UseInterceptors } from '@nestjs/common';
+import { AnyFilesInterceptor, FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
+import { diskStorage } from 'multer';
 import { DeleteProduct, productRegister, updateProduct } from './dto/Product.dto';
 import { ProductService } from "../product/product/product.service";
+import { extname } from 'path';
+import { Response } from 'express';
 @Controller('product')
 export class ProductController {
     constructor(private productService: ProductService) { }
     @Post('/register')
-    async create(@Body() req: productRegister) {
+    @UseInterceptors(
+        AnyFilesInterceptor({
+            storage: diskStorage({
+                destination: './files',
+                filename: (req, file, cb) => {
+                    const randomName = Array(32).fill(null).map(() => (Math.round(Math.random() * 16)).toString(16)).join('')
+                    cb(null, `${randomName}${extname(file.originalname)}`)
+                }
+            }),
+        }),
+    )
+    async create(@Body() req: productRegister, @UploadedFiles() documents) {
         try {
-            const result = await this.productService.Create(req)
+            const result = await this.productService.Create(req, documents)
             console.log("result", result);
             
             return result
