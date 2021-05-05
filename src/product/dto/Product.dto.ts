@@ -22,3 +22,7 @@ export class DeleteProduct{
     DeleteType : string
     Product_id:string
     }
+
+export class ProductId{
+    Product_id: string
+}

@@ -5,11 +5,13 @@ import { AppService } from './app.service';
 import { ProductModule } from './product/product/product.module';
 import { UserModule } from './users/user.module';
 import { MongooseConfigService } from './_common/configs/mongoose.config';
+import { OrdersModule } from './orders/orders.module';
 @Module({
   imports: [
     MongooseModule.forRootAsync({useClass : MongooseConfigService}),
     UserModule,
-    ProductModule
+    ProductModule,
+    OrdersModule
     ],
   controllers: [AppController],
   providers: [AppService]

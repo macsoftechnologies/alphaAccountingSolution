@@ -85,3 +85,7 @@ export class updateUser{
     Password : string 
     
 }
+
+export class user_Id{
+    UserId: string
+}
