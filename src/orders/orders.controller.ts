@@ -1,4 +1,5 @@
 import { Controller,  Body, Get, HttpCode, HttpStatus, Param, Post, Put, Query, Res, Delete } from '@nestjs/common';
+import { user_Id } from 'src/users/dto/user.dto';
 import { productOrder } from './dto/orders.dto';
 import { OrdersService } from './orders.service';
 
@@ -19,6 +20,20 @@ export class OrdersController {
             };
         }
 
+    }
+
+    @Get('/OrderList')
+    async orderDetails(@Query('UserId') UserId : string) {
+        console.log(UserId)
+        try {
+            const response = await this.ordersService.orderDetails(UserId)
+            return response
+        } catch (error) {
+            return {
+                StatusCode : HttpStatus.INTERNAL_SERVER_ERROR,
+                Message : error
+            }
+        }
     }
 
 }

@@ -42,4 +42,34 @@ export class OrdersService {
             };
         }
     }
+
+    async orderDetails(UserId: string) {
+        try {
+
+            const userResponse = await this.orderModel.find({ UserId: UserId})
+
+            if (userResponse) {
+                return {
+                    StatusCode: HttpStatus.OK,
+                    Message: 'User Details',
+                    Data: {
+                        UserDetails: userResponse
+                    }
+
+                }
+            }
+            return {
+                StatusCode: HttpStatus.BAD_REQUEST,
+                Message: "InValid Request"
+            }
+
+        } catch (error) {
+            return {
+                StatusCode: HttpStatus.INTERNAL_SERVER_ERROR,
+                Message: error
+
+            }
+        }
+    }
+
 }
