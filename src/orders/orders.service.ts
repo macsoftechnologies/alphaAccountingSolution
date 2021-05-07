@@ -51,7 +51,7 @@ export class OrdersService {
             if (userResponse) {
                 return {
                     StatusCode: HttpStatus.OK,
-                    Message: 'User Details',
+                    Message: 'List of Orders',
                     Data: {
                         UserDetails: userResponse
                     }
@@ -71,5 +71,35 @@ export class OrdersService {
             }
         }
     }
+
+    async UsersList(ProductId: string) {
+        try {
+
+            const userResponse = await this.orderModel.find({ ProductId: ProductId})
+
+            if (userResponse) {
+                return {
+                    StatusCode: HttpStatus.OK,
+                    Message: 'List of Users',
+                    Data: {
+                        UserDetails: userResponse
+                    }
+
+                }
+            }
+            return {
+                StatusCode: HttpStatus.BAD_REQUEST,
+                Message: "InValid Request"
+            }
+
+        } catch (error) {
+            return {
+                StatusCode: HttpStatus.INTERNAL_SERVER_ERROR,
+                Message: error
+
+            }
+        }
+    }
+
 
 }
