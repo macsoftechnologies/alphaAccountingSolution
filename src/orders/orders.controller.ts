@@ -36,4 +36,17 @@ export class OrdersController {
         }
     }
 
+    @Get('/UsersList')
+    async UsersList(@Query('Product_Id') ProductId : string) {
+        console.log(ProductId)
+        try {
+            const response = await this.ordersService.UsersList(ProductId)
+            return response
+        } catch (error) {
+            return {
+                StatusCode : HttpStatus.INTERNAL_SERVER_ERROR,
+                Message : error
+            }
+        }
+    }
 }

@@ -103,4 +103,34 @@ export class ProductService {
         }
 
     }
+
+    async usersList(Product_Id: string) {
+        try {
+
+            const userResponse = await this.productModel.find({ Product_Id: Product_Id})
+
+            if (userResponse) {
+                return {
+                    StatusCode: HttpStatus.OK,
+                    Message: 'User Details',
+                    Data: {
+                        UserDetails: userResponse
+                    }
+
+                }
+            }
+            return {
+                StatusCode: HttpStatus.BAD_REQUEST,
+                Message: "InValid Request"
+            }
+
+        } catch (error) {
+            return {
+                StatusCode: HttpStatus.INTERNAL_SERVER_ERROR,
+                Message: error
+
+            }
+        }
+    }
+
 }

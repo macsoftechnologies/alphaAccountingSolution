@@ -61,4 +61,18 @@ export class ProductController {
         };
       }
     } 
+    @Get('/UsersList')
+    async usersList(@Query('ProductId') Product_Id : string) {
+        console.log(Product_Id)
+        try {
+            const response = await this.productService.usersList(Product_Id)
+            return response
+        } catch (error) {
+            return {
+                StatusCode : HttpStatus.INTERNAL_SERVER_ERROR,
+                Message : error
+            }
+        }
+    }
+
 }

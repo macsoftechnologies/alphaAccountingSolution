@@ -4,6 +4,7 @@ import { CreateDateColumn, UpdateDateColumn } from 'typeorm';
 export class productOrder{
     Order_id:string
     UserId:string
+    ProductId:string
     @Type(() => Date)
     @IsDate()
     CreatedDate: Date;

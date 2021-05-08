@@ -9,6 +9,7 @@ export class order extends Document{
     @Prop({required : true})
     UserId: string
     @Prop({required : true})
+    ProductId:string
     CreatedDate: Date
     @Prop({required : true})
     UpdatedDate : string
