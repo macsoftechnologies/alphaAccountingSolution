@@ -13,3 +13,8 @@ export class productOrder{
     UpdatedDate: Date; 
     OrderedPrice : string
 }
+
+export class orderStatus{
+    Order_id:string
+    status:string
+}

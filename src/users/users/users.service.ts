@@ -4,6 +4,7 @@ import { Model } from 'mongoose';
 import { Users } from '../schema/user.schema';
 import { UserRegister, UserLogin, VerifyOtpDto, UserUpdate, DeleteUser, updateUser } from '../dto/user.dto';
 import moment = require('moment');
+import { orderStatus } from 'src/orders/dto/orders.dto';
 @Injectable()
 export class UsersService {
 
@@ -233,5 +234,4 @@ export class UsersService {
             }
         }
     }
-   
 }

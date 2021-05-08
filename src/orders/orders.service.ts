@@ -1,7 +1,7 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { productOrder } from './dto/orders.dto';
+import { orderStatus, productOrder } from './dto/orders.dto';
 import { order } from './dto/schema/order.schema';
 @Injectable()
 export class OrdersService {
@@ -101,5 +101,28 @@ export class OrdersService {
         }
     }
 
-
+   
+    async updateStatus(body: orderStatus) {
+       console.log(body)
+        try {
+            // console.log(body, "body............")
+            const updateRes = await this.orderModel.updateOne({ Order_id: body.Order_id }, { $set: { status: body.status } })
+            // console.log(updateRes, "update,,res")
+            if (updateRes.nModified == 1) {
+                return {
+                    StatusCode: HttpStatus.OK,
+                    Message: "Updated SuccessFully"
+                }
+            }
+            return {
+                StatusCode: HttpStatus.BAD_REQUEST,
+                Message: "Updated Failed"
+            }
+        } catch (error) {
+            return {
+                StatusCode: HttpStatus.INTERNAL_SERVER_ERROR,
+                Message: error.message
+            }
+}
+ }
 }
