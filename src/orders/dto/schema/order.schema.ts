@@ -15,5 +15,7 @@ export class order extends Document{
     UpdatedDate : string
     @Prop({required : true})
     OrderedPrice : string
+    @Prop({default: "pending"})
+    status:string
 }
 export const  OrderSchema = SchemaFactory.createForClass(order);
