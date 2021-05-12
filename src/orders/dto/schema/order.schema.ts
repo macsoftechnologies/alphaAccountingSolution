@@ -17,5 +17,10 @@ export class order extends Document{
     OrderedPrice : string
     @Prop({default: "pending"})
     status:string
+    Name:string
+    Age:number
+    MobileNum:number
+    @IsEmail()
+    Email:string
 }
 export const  OrderSchema = SchemaFactory.createForClass(order);
