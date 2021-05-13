@@ -1,4 +1,4 @@
-import { IsString, IsEmail, IsOptional, IsNumber, IsNotEmpty } from 'class-validator';
+import { IsString, IsEmail, IsOptional, IsNumber, IsNotEmpty, IsArray } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 export class partnersRegistration{
     @ApiProperty()
@@ -24,14 +24,12 @@ export class updatePartner{
     @ApiProperty()
     @IsNotEmpty()
     ProductId: string
-    Partners:[{Name:string,
-    Age:number,
-    MobileNum:number,
-    Email:string,
-    },
-    {Name:string,
-        Age:number,
-        MobileNum:number,
-        Email:string,
-        }]
+    @IsArray()
+    Partners:partners[]
 }
+ export class partners
+ {Name:string
+    Age:number
+    MobileNum:number
+    Email:string
+    }

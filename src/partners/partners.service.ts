@@ -10,15 +10,15 @@ export class PartnersService {
    
     async Create(req: partnersRegistration) {
         try {
-            const orderRes = await this.partnersModel.create(req)
-            if (orderRes) {
+            const partnersRes = await this.partnersModel.create(req)
+            if (partnersRes) {
                 return {
                     statusCode: HttpStatus.OK,
                     message: "Partners Registered SuccessFully",
                     data: {
-                        authentication: {
-                            UserId: orderRes.UserId,
-                            ProductId: orderRes.ProductId,
+                        PartnersRegistered: {
+                            UserId: partnersRes.UserId,
+                            ProductId: partnersRes.ProductId,
                             
                         }
                     }
@@ -41,7 +41,7 @@ export class PartnersService {
     async updatePartners(body: updatePartner) {
         try {
              console.log(body, "body............")
-            const updateRes = await this.partnersModel.updateOne({ $and: [{ UserId: body.UserId }, { ProductId: body.ProductId }] }, { $set: { Name: body.Partners, Email: body.Partners, Age: body.Partners, MobileNum: body.Partners } })
+            const updateRes = await this.partnersModel.updateOne({ UserId: body.UserId ,ProductId: body.ProductId},{Partners:body.Partners})
              console.log(updateRes, "update,,res")
             if (updateRes.nModified == 1) {
                 return {
@@ -59,8 +59,8 @@ export class PartnersService {
                 Message: error.message
             }
         }
-    }
-    async UserDetails(UserId: string) {
+      }
+     async UserDetails(UserId: string) {
         try {
 
             const userResponse = await this.partnersModel.findOne({ UserId: UserId })
@@ -88,5 +88,5 @@ export class PartnersService {
             }
         }
     }
-   
+    
 }
