@@ -34,7 +34,7 @@ export class ProductService {
                     statusCode: HttpStatus.OK,
                     message: "Registered SuccessFully",
                     data: {
-                        authentication: {
+                        UserRegistration: {
                             Name_of_the_product: registerRes.Name_of_the_product,
                             Description: registerRes.Description,
                             Price: registerRes.Price

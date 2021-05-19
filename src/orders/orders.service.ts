@@ -17,7 +17,7 @@ export class OrdersService {
                     statusCode: HttpStatus.OK,
                     message: "Registered SuccessFully",
                     data: {
-                        authentication: {
+                        OrderPlaced: {
                             Order_id: orderRes.Order_id,
                             OrderedPrice: orderRes.OrderedPrice,
                             

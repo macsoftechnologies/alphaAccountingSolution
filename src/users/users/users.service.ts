@@ -2,7 +2,7 @@ import { HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Users } from '../schema/user.schema';
-import { UserRegister, UserLogin, VerifyOtpDto, UserUpdate, DeleteUser, updateUser } from '../dto/user.dto';
+import { UserRegister, UserLogin, VerifyOtpDto, UserUpdate, DeleteUser, updateUser, rating } from '../dto/user.dto';
 import moment = require('moment');
 import { orderStatus } from 'src/orders/dto/orders.dto';
 @Injectable()
@@ -233,5 +233,34 @@ export class UsersService {
                 Message: error.message
             }
         }
+    }
+
+    async rating(req: rating) {
+        try {
+             const registerRes = await this.userModel.create(req)
+           
+             if (registerRes) {
+                return {
+                    statusCode: HttpStatus.OK,
+                    message: "Thank you for your response",
+                    data: {
+                        UserRating: {
+                            rating: registerRes.Rating,
+                            Product_Id: registerRes.Product_id,
+                            UserId: registerRes.UserId
+                        }
+                    }
+                }
+            }
+             return {
+                statusCode: HttpStatus.BAD_REQUEST,
+                message: "Invalid Request"
+            }
+        } catch (error) {
+            return {
+                statusCode: HttpStatus.INTERNAL_SERVER_ERROR,
+                message: error.message,
+            };
+         }
     }
 }

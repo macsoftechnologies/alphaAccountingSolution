@@ -4,44 +4,36 @@ export class UserLogin {
     
     @ApiProperty()
     @IsString()
-    @IsNotEmpty()
     MobileNum: number
     
     @ApiProperty()
     @IsString()
-    @IsNotEmpty()
     @IsEmail()
     Email: string
     
     @ApiProperty()
     @IsString()
-    @IsNotEmpty()
     Password: string
 }
 
 export class UserRegister {
     @ApiProperty()
-    
     UserId: string;
-
+    
     @ApiProperty()
     @IsString()
-    @IsNotEmpty()
     UserName: string;
 
     @ApiProperty()
-    @IsNotEmpty()
     @IsEmail()
     Email: string;
 
     @ApiProperty()
     @IsString()
-    @IsNotEmpty()
     MobileNum:number;
 
     @ApiProperty()
     @IsString()
-    @IsNotEmpty()
     Password: string;
 }
 
@@ -69,7 +61,6 @@ export class UserUpdate {
     UserId : string
     Email : string
     Mobile : string
-
 }
 
 export class DeleteUser{
@@ -88,4 +79,15 @@ export class updateUser{
 
 export class user_Id{
     UserId: string
+}
+
+export class userStatus{
+    UserId:string
+    status:string
+}
+
+export class rating{
+    UserId:string
+    Product_id:string
+    Rating:number
 }

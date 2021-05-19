@@ -1,14 +1,16 @@
-import { Controller, Body, Get, HttpCode, HttpStatus, Param, Post, Put, Query, Res, Delete } from '@nestjs/common';
+import { Controller, Body, Get, HttpCode, HttpStatus, Param, Post, Put, Query, Res, Delete, SetMetadata, UseGuards } from '@nestjs/common';
 import { UsersService } from '../users/users/users.service';
-import { UserRegister, UserLogin, MobileNumberDto, VerifyOtpDto, UserUpdate, DeleteUser, updateUser} from '../users/dto/user.dto';
+import { UserRegister, UserLogin, MobileNumberDto, VerifyOtpDto, UserUpdate, DeleteUser, updateUser, rating} from '../users/dto/user.dto';
 import { Response } from 'express';
 import moment = require('moment');
+import { RolesGuard } from 'src/roles.guard';
 
 @Controller('users')
 export class UsersController {
 
     constructor(private UsersService: UsersService) { }
-
+    @UseGuards(RolesGuard)
+    @SetMetadata('roles', ['User'])
     @Post('/register')
     async create(@Body() req: UserRegister) {
         try {
@@ -24,7 +26,9 @@ export class UsersController {
         }
 
     }
-
+    
+    @UseGuards(RolesGuard)
+    @SetMetadata('roles', ['User'])
     @Post('/login')
     async login(@Body() req: UserLogin) {
         try {
@@ -39,12 +43,16 @@ export class UsersController {
 
     }
 
+    @UseGuards(RolesGuard)
+    @SetMetadata('roles', ['User'])
     @Get('/admin')
     async getAllUsers(){
         const users = await this.UsersService.getUsers();
         return users;
     }
-
+    
+    @UseGuards(RolesGuard)
+    @SetMetadata('roles', ['User'])
     @Get('/userdetails')
     async userDetails(@Query('Email') Email : string) {
         console.log(Email)
@@ -60,7 +68,8 @@ export class UsersController {
     }
   
       // Generate OTP
-
+  @UseGuards(RolesGuard)
+  @SetMetadata('roles', ['User'])
   @Post('/generateOTP')
   async generateOTP(@Body() body:  MobileNumberDto, @Res() res: Response) {
     try {
@@ -101,7 +110,7 @@ export class UsersController {
       });
     }
   }
- 
+
  @Delete('/delete')
   async deleteUser(@Body() req: DeleteUser) { 
     try {
@@ -115,7 +124,9 @@ export class UsersController {
       };
     }
   }
-
+  
+  @UseGuards(RolesGuard)
+  @SetMetadata('roles', ['User'])
   @Put('/update')
     async update(@Body() req: updateUser) {
         try {
@@ -128,6 +139,23 @@ export class UsersController {
             };
         }
     }
+
+    //Providing ratings by user
+    @Post('/productsRating')
+    async postRating(@Body() req: rating) {
+      try {
+          const result = await this.UsersService.rating(req)
+          console.log("result", result);
+          
+          return result
+      } catch (error) {
+          return {
+              statusCode: HttpStatus.INTERNAL_SERVER_ERROR,
+              message: error.message,
+          };
+      }
+
+  }
 }
 
     

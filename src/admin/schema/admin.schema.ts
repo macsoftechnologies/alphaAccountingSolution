@@ -3,35 +3,23 @@ import { Document } from 'mongoose';
 import { IsString, IsEmail, IsEnum, IsOptional, IsNumber } from 'class-validator';
 import { v4 as uuid } from 'uuid';
 @Schema({ timestamps: true })
-export class Users extends Document{
+export class admin extends Document{
     @Prop({required : true , unique:true , default : uuid})
-    UserId: string
-    @Prop()
-    UserName : string
-    @Prop()
-    Email : string
-    @Prop()
-    MobileNum : number
-    @Prop()
-    Password : string
-   
-    @Prop()
-    otp: string;
-  
-    @Prop()
-    otpExpiryTime: string;
-
+    Product_id: string
+    @Prop({required : true})
+    Name_of_the_product: string
+    @Prop({required : true})
+    Description : string
+    @Prop({required : true})
+    Price : string
+    @Prop({required: true})
+    Discount : number
+    @Prop({required : true})
+    Documents_required : string
     @Prop({ default: false })
     @IsOptional()
     isDeleted?: boolean;
-
     @Prop({default: "Active"})
     status:string
-   
-    @Prop()
-    Product_id:string
-
-    @Prop()
-    Rating:number
 }
-export const  UsersSchema = SchemaFactory.createForClass(Users);
+export const  adminSchema = SchemaFactory.createForClass(admin);
