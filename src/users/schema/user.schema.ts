@@ -31,7 +31,7 @@ export class Users extends Document{
     @Prop()
     Product_id:string
 
-    @Prop()
-    Rating:number
+   // @Prop()
+    //Rating:number
 }
 export const  UsersSchema = SchemaFactory.createForClass(Users);

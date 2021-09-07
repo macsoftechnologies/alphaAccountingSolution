@@ -5,7 +5,8 @@ export class partnersRegistration{
     @IsNotEmpty()
     UserId : string
     ProductId: string
-    Partners:[{Name:string,
+    Partners:[{
+    Name:string,
     Age:number,
     MobileNum:number,
     Email:string
@@ -28,8 +29,8 @@ export class updatePartner{
     Partners:partners[]
 }
  export class partners
- {Name:string
+ {  Name:string
     Age:number
     MobileNum:number
     Email:string
-    }
+ }

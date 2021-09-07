@@ -86,8 +86,8 @@ export class userStatus{
     status:string
 }
 
-export class rating{
+/*export class rating{
     UserId:string
     Product_id:string
     Rating:number
-}
+}*/

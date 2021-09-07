@@ -2,9 +2,8 @@ import { HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Users } from '../schema/user.schema';
-import { UserRegister, UserLogin, VerifyOtpDto, UserUpdate, DeleteUser, updateUser, rating } from '../dto/user.dto';
+import { UserRegister, UserLogin, VerifyOtpDto, UserUpdate, DeleteUser, updateUser } from '../dto/user.dto';
 import moment = require('moment');
-import { orderStatus } from 'src/orders/dto/orders.dto';
 @Injectable()
 export class UsersService {
 
@@ -235,7 +234,7 @@ export class UsersService {
         }
     }
 
-    async rating(req: rating) {
+  /*  async rating(req: rating) {
         try {
              const registerRes = await this.userModel.create(req)
            
@@ -263,4 +262,5 @@ export class UsersService {
             };
          }
     }
+    */
 }

@@ -1,6 +1,6 @@
 import { Controller, Body, Get, HttpCode, HttpStatus, Param, Post, Put, Query, Res, Delete, SetMetadata, UseGuards } from '@nestjs/common';
 import { UsersService } from '../users/users/users.service';
-import { UserRegister, UserLogin, MobileNumberDto, VerifyOtpDto, UserUpdate, DeleteUser, updateUser, rating} from '../users/dto/user.dto';
+import { UserRegister, UserLogin, MobileNumberDto, VerifyOtpDto, UserUpdate, DeleteUser, updateUser} from '../users/dto/user.dto';
 import { Response } from 'express';
 import moment = require('moment');
 import { RolesGuard } from 'src/roles.guard';
@@ -140,7 +140,7 @@ export class UsersController {
         }
     }
 
-    //Providing ratings by user
+    /*Providing ratings by user
     @Post('/productsRating')
     async postRating(@Body() req: rating) {
       try {
@@ -153,9 +153,9 @@ export class UsersController {
               statusCode: HttpStatus.INTERNAL_SERVER_ERROR,
               message: error.message,
           };
-      }
+      }*/
 
-  }
+  
 }
 
     

@@ -8,7 +8,8 @@ import { MongooseConfigService } from './_common/configs/mongoose.config';
 import { OrdersModule } from './orders/orders.module';
 import { PartnersModule } from './partners/partners.module';
 import { AdminModule } from './admin/admin.Module';
-import { SeviceController } from './rating/sevice/sevice.controller';
+import { userRatingModule } from './user-rating/userRating.module';
+
 @Module({
   imports: [
     MongooseModule.forRootAsync({useClass : MongooseConfigService}),
@@ -16,9 +17,10 @@ import { SeviceController } from './rating/sevice/sevice.controller';
     ProductModule,
     OrdersModule,
     PartnersModule,
-    AdminModule
-    ],
-  controllers: [AppController, SeviceController],
+    AdminModule,
+    userRatingModule,
+  ],
+  controllers: [AppController],
   providers: [AppService]
 })
 export class AppModule {}
